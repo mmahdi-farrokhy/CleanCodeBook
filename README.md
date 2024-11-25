@@ -13,7 +13,6 @@ Disturbances quickly lead to slowness and deadline violations. The only way to m
 In this document, we learn more about the concept of clean code and try to consider its
 several different definitions.
 
-
 ## Why should my code be clean?
 ### Martin Fowler(British Software Engineer): Any fool can write a code that a computer understands. Good programmers write a code that humans can understand.
 So the code has to be clean in order to be easy-to-understand by a humans. Which can be the author of the code or someone else.
@@ -47,6 +46,7 @@ Clean code always looks like it was written by someone who cares.There isnothing
     reading the name of modules(class, method, variable, ...).
 - Every module is made for one and only one purpose.
 ---
+
 # Meaningful Names
 Name of the classes, methods and variables must have some characteristics to make it easier to understand the code. In this chapter we will learn a few of them.
 
@@ -122,3 +122,300 @@ private void changeColorOfTextOnMouseClick()
 - There is no similarand duplicatednames.
 - The more the distanceof a variable’s declaration and usage, the longerits name.
 - The more publica method, the more generalits task and the shorterits name.
+---
+# Methods
+Methods play an important role in code; they define a class's behavior. You might have encountered methods
+- with more than 100 lines
+- managing multiple of tasks
+- dealing with excessive arguments
+- returning values calculated from mathematical operations.
+
+Such methods are listed as dirty code. However, there are some points to consider that makes methods way too clean.
+
+## Rules of clean methods:
+### *Rule #1: One Method – One Task*
+Each method should implement one and only one task. While the implementation itself may involve calling multiple methods that execute a solitary job. If a method takes the responsibility of more than one task, it does the task either wrong or dirty. One way to know if the method does more than one job is to name the method as it reflects the sequence of events within it. If the method name contains or, andor thenit does multiple tasks. Each proposition between these words is to be implemented as a separate method.
+
+```
+    // BAD CODE
+    public void getUserInputAndSaveInDatabase() {
+        // Code To Get User Input
+        // Code To Save In Database
+    }
+```
+
+```
+    // GOOD CODE
+    public void SaveInDatabase() {
+        SaveUserInputInDataBase(getUserInput());
+    }
+
+    public UserInput getUserInput() {
+        // Code To Get And Return User Input
+    }
+
+    public void SaveUserInputInDataBase(UserInput userInput) {
+        // Code To Save User Input In Database
+    }
+```
+
+### *Rule #2: Method Is Small As Possible.*
+There is a saying about this rule: **Extract till you drop.** We break a method down to smaller methods to reduce complexity and code duplication. This aligns with rule #1.
+
+### *Rule #3: The Fewer The Arguments, The Cleaner The Method*
+Having too many arguments for a method confuses the reader and makes it more difficult to understand the method’s behavior. It also complicates writing coverable tests. Best kind of method has no arguments. Although we can have method arguments, but it's not recommended to havw more than with 3 arguments. One way to decrease the number of arguments is to gather similar ones in a single object.
+
+```
+    // BAD CODE
+    private Circle createCircle(double x, double y, double radius)
+```
+
+```
+    // GOOD CODE
+    private Circle createCircle(Point center, double radius)
+```
+
+### *Rule #4: No Boolean/Null/Enum Arguments*
+Introducing boolean/nullable/enum arguments introduces branching logic, leading to multiple distinct paths depending on argument's value. So it violates rule #1. Because more than one task is being implemented in one method. We should check its value before calling the method and implement differene methods for its differene values.
+
+```
+    // BAD CODE
+    private void mainMethod() {
+        someMethod(someCondition);
+    }
+
+    private void someMethod(boolean condition) {
+        if (condition)
+            doThis();
+        else
+            doThat();
+    }
+```
+
+```
+    // GOOD CODE
+    private void mainMethod() {
+        if (someCondition)
+            doSomething();
+        else
+            doSomethingElse();
+    }
+
+    private void doSomething() {
+    }
+
+    private void doSomethingElse() {
+    }
+```
+
+### *Rule #5: Argument Should Not Be Changed In The Method Body.*
+Changing the argument's value makes it unpredictable and difficult for us to trace the code in debugging.
+
+### *Rule #6: No switch-case To Decide What To Do Or How To Do It.*
+In many situations we check the value of an object in a switch statement and decide what operation to perform in different cases. This is doing multiple tasks and violates rule #1. Instead, we create an abstract class with abstract methods and some concrete classes that extend it. Each child class is related to one case. Then we create an object of the abstract class and initialize it in cases by concrete classes and call the abstract method on the object.
+
+```
+    // BAD CODE
+    public Shape createShape(ShapeType shapeType) {
+        switch(shapeType)
+        {
+            case "chapter06.Rectangle":
+                return side * side;
+            case "chapter06.Circle":
+                return 3.14 * radius * radius;
+            case "Triangle":
+                return (base * height) / 2;
+        }
+    }
+```
+
+```
+    // GOOD CODE
+    public interface Shape {
+        public double area();
+    }
+
+    public class Rectangle implements Shape {
+        private double side;
+
+        @Override
+        public double area() {
+            return side * side;
+        }
+    }
+
+    public class Circle implements Shape {
+        private double radius;
+
+        @Override
+        public double area() {
+            return radius * radius * 3.14;
+        }
+    }
+
+    public class Triangle implements Shape {
+        private double base;
+        private double height;
+
+        @Override
+        public double area() {
+            return base * height / 2;
+        }
+    }
+
+    ////////////////////////////////////////////////////
+
+    public Shape createShape(ShapeType shapeType) {
+        switch (shapeType) {
+            case "Rectangle":
+                return new Rectangle();
+            case "Circle":
+                return new Circle();
+            case "Triangle":
+                return new Triangle();
+        }
+    }
+
+    public double calculateShapeAre() {
+        Shape shape = createShape(shapeType);
+        return shape.area();
+    }
+```
+
+### *Rule #7: Separate Commands From Queries.*
+Imagine a method that sends a request or executes a command. But at the same time it executes query and returns data. It is both *setter* and *getter*.
+
+```
+    // BAD CODE
+    public boolean saveInDatabase(Data data) {
+        // Code To Save Data In Database
+        // Code To Check If The Data Was Successfully Saved In Database And Return The Result
+    }
+```
+
+```
+    // GOOD CODE
+    public void saveInDatabase(Data data) {
+        // Code To Save Data In Database
+    }
+
+    public boolean isDataSaved(Data data) {
+        // Code To Check If The Data Was Successfully Saved In Database And Return The Result
+    }
+```
+
+### *Rule #8: Avoid Returning Null.*
+Sometimes we return null if an operation couldn’t be done or a variable has unexpected value. It increases the risk of NullPointerException which is a difficult exception to handle. The first alternative approach is to return an object with default values. The best one is to define customized exceptions and throw them instead of returning null.
+
+```
+    // BAD CODE
+    public User createNewUser() {
+        User newUser;
+
+        if (isPasswordConfirmed)
+            newUser = new User();
+        else
+            newUser = null;
+
+        return newUser;
+    }
+```
+
+```
+    // GOOD CODE
+    public User createNewUser() {
+        User newUser;
+
+        if (isPasswordConfirmed)
+            newUser = new User();
+        else
+            throw new PasswordNotConfirmedException();
+
+        return newUser;
+    }
+```
+
+### *Rule #9: One Entry – One Exit*
+Using return or break statements in the middle of method makes it dirty. The best practice is to have only one return in the method.
+
+```
+    // BAD CODE
+    public Value getSomeValue() {
+        if (condition)
+            return value1;
+        else
+            return value2;
+    }
+```
+
+```
+    // GOOD CODE
+    public Value getSomeValue() {
+        Value result;
+        if (condition)
+            result = value1;
+        else
+            result = value2;
+
+        return result;
+    }
+```
+
+### *Rule #10: Blocking & Indentation*
+The depth of blocks should not pass three levels.
+
+```
+    // BAD CODE
+    public void doSomething() {
+        if (condition) {
+            for (int i = 0; i < n; i++) {
+                for (int j = 0; j < m; j++) {
+                    // Commands
+                }
+            }
+        }
+    }
+```
+
+```
+    // GOOD CODE
+    public void doSomething() {
+        if (condition) {
+            for (int i = 0; i < n; i++) {
+                executeCommands();
+            }
+        }
+    }
+```
+
+### *Rule #11: try-catch Extraction*
+If try-catch is required, it should be isolated as the implementation of a method. The method begins with try and ends with catch or finally. In the try scope we call a method that might throw a certain exception.
+
+```
+    // BAD CODE
+    private String openDocumentButtonPushed() {
+        // Codes That Open And Read The Document
+        try {
+            // Code With Possibility Of An Exception
+        } catch (SomeException exception) {
+            showMessageBox(“An error occurred while opening the document”);
+        }
+
+        // Code To Process Data Read From The Document
+    }
+```
+
+```
+    // GOOD CODE
+    private void openDocumentButtonPushed() {
+        try {
+            openDocument();
+        } catch (NullPointerException | IOException e) {
+            showMessageBox(“An error occurred while opening the file”);
+        }
+    }
+
+    public void openDocument(String filePath) throws IOException, NullPointerException {
+        // Implementation
+    }
+```
