@@ -861,3 +861,43 @@ Third Party Code is a code that we use, but did not write. Like calling an API. 
 - **Easy Adaptation:** Changing the API or library becomes simpler since modifications are only limited to the wrapper class.
 - **Enhanced Testing:** While we can't directly test the API itself, we can test the wrapper class effectively.
 - **Forward Planning:** Imagine a scenario where the API isn't available yet. We could create other modules of our program, test and use them without problems. This is because our dependency on the API is limited to just one class. This grants us and the API development team more flexibility and time for development.
+---
+# Unit Tests
+### *Test Driven Development*: It's really important to write effective unit tests to ensure code quality, reliability, and maintainability. They provide us early detection of bugs during development. It's also so imortant to keep test code as clean as production code. Clean tests satisfy the need for documentation, as they describe the logical flow of a class or even the entire software.
+
+## The Three Laws of TDD
+Test Driven Development (TDD) is a practice where tests are written before the actual code. TDD is guided by three laws:
+1. Begin by writing a failing test that cannot be compiled.
+2. Write just enough production code to make the failing test compile and pass logically.
+3. Develop the production code only to pass the test, without exceeding the requirements.
+
+Here we consider some points about TDD.
+
+### *Test Driven Development*
+- Tests Must Be Clean.
+    - As the product evolves, tests evolve too.
+    - Dirty tests lead to challenges during modification.
+    - An unclear test requires additional time and effort to cover new product code.
+    - Test code holds equal importance as product code.
+    - Test code is not a second class citizen; it demands careful thought, design and attention.
+
+- Tests Give You Power.
+    - Unit tests empower your code by enhancing its flexibility, maintainability, and reusability.
+    - When you have tests in place, you gain the confidence to modify your code without fear.
+    - In the absence of tests, any modification becomes a potential bug.
+    - Regardless of your architecture's flexibility or the elegance of your design, the absence of tests leads to hesitation in making changes.
+
+- One Test – One Assertion: This rule might look a little much too strict, but it has a great benefit. Tests with only one assertion are fast and easy to understand. But we can be more flexible and change the rule into another:
+    - One Test - The Minimum Number Of Assertions Possible.
+
+- One Test – One Concept
+    - Best practice is to test a single concept inside each test method.
+    - Avoid lengthy test methods that test multiple subjects consecutively.
+    - This principle aligns with the earlier guideline and results to  minimal assertions in test methods.
+
+- Tests Should Be F.I.R.S.T: Clean tests also follow five other guidelines:
+    - Fast: Test should run quickly.
+    - Independent: Test should not depend on other tests.
+    - Repeatable: Test should produce the same result every time.
+    - Self-Validating: Test should have a boolean output.
+    - Timely: Test should be written before production code, not after it.
