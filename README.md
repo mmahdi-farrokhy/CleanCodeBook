@@ -55,7 +55,7 @@ Name of the classes, methods and variables must have some characteristics to mak
     - What was the author of the code thinking about and what was he looking for?
     - What is this module supposed to do?
 
-The name should be chosen in a way that no comments or documents are required to answer these questions. Name of the element should answer all the big questions. If a name needs comment, it doesn’t reveal its intent.
+The name should be chosen in such way that no comments or documents are required to answer these questions. Name of the element should answer all the big questions. If a name needs comment, it doesn’t reveal its intent.
 
 ```
 private void changeColorOfText()
@@ -70,7 +70,7 @@ private void changeColorOfTextOnMouseClick()
     - Using long similar names like XYZControllerForEfficientHandlingOfStrings and XYZControllerForEfficientStorageOfStrings.
     - Using the letters Oand lalong side with the numbers 0 and 1.
 
-3. **The name should make meaningful distinctions.** We should pick a name for code elements in a way to differthem easily, no matter how much they are alike. Some examples:
+3. **The name should make meaningful distinctions.** We should pick a name for code elements in such way to differthem easily, no matter how much they are alike. Some examples:
     - The names in a scope, or method arguments should not be singularletterand similar, like they are only to satisfy the compiler. The reader should not be forced to read the algorithm to understand the intention of the variable.
     - Three classes named Product, ProductInfoand ProductData. What is the intention behind each one?
     - Using words like variable, methodor classfor naming.
@@ -959,3 +959,107 @@ Adapter design pattern.
 - If a method is too large, it should be divided into multiple small methods, each one implementing one task.
 - Some of these small methods interact with some objects from a specific class. They should be moved to that class.
 - It is very usual to add new features or fix bugs in a software. The legacy code has to change. It comes with a risk. The change on one module would disrupt the functionality of others. To avoid this issue, we use interfaces or abstract classes, and place the new codes inside a new class that extends the parent class or interface.
+---
+# Systems
+A software system is composed of distinct sub-systems and layers, each handling specific tasks. Crucially, these sub-systems must be isolated from one another. The client method constructs the required objects for the system and hands them over to the application layer, which utilizes them.
+
+## Dependency Injection and Inversion of Control (IoC)
+A potent technique to segregate creation from application logic is dependency injection. This involves employing inversion of control (IoC) in dependencies management. With dependency inversion, we can delegate secondary responsibilities from one object to others that are specifically designed for it, leading to compliance of *SRP*. In the dependency handling concept, an object should not bear the responsibility of instantiating its own dependencies. Instead, this task must be entrusted to a different, influential mechanism that inverts the control. Typically, this powerful mechanism is either the main routine or a single purpose container, considering the setup as a global concern.
+
+
+```
+    public interface MessageSender {
+        public void sendMessage(String recipient, String message);
+    }
+```
+
+```
+    public class EmailSender implements MessageSender {
+        @Override
+        public void sendMessage(String recipient, String message) {
+            System.out.println("Sending email to " + recipient + ": " + message);
+        }
+    }
+```
+
+```
+    public class SMSSender implements MessageSender{
+        @Override
+        public void sendMessage(String recipient, String message) {
+            System.out.println("Sending SMS to " + recipient + ": " + message);
+        }
+    }
+```
+
+```
+    public class User {
+        private String contactInfo;
+
+        public User(String contactInfo) {
+            this.contactInfo = contactInfo;
+        }
+
+        public String getContactInfo() {
+            return contactInfo;
+        }
+    }
+```
+
+```
+    // BAD CODE
+    public class UserController {
+        private String communicationMethod;
+        private EmailSender emailSender = new EmailSender();
+        private SMSSender smsSender = new SMSSender();
+
+        public UserController(String communicationMethod) {
+            this.communicationMethod = communicationMethod;
+            emailSender = new EmailSender();
+            smsSender = new SMSSender();
+        }
+
+        public void registerUser(User user) {
+            if (communicationMethod.equals("Email")) {
+                emailSender.sendMessage(user.getContactInfo(),
+                    "Welcome to our platform!");
+            }
+            else if (communicationMethod.equals("SMS")) {
+                smsSender.sendMessage(user.getContactInfo(),
+                    "Welcome to our platform!");
+            }            
+        }
+    }
+```
+
+```
+    // GOOD CODE
+    public class UserController {
+        private MessageSender messageSender;
+
+        public UserController(MessageSender messageSender) {
+            this.messageSender = messageSender;
+        }
+
+        public void registerUser(User user) {
+            messageSender.sendMessage(user.getContactInfo(),
+                    "Welcome to our platform!");
+        }
+    }
+```
+
+```
+    public class Client {
+        public static void main(String[] args) {
+            UserController userController = new UserController(new EmailSender());
+            User user = new User("user@email.com");
+            userController.registerUser(user);
+        }
+    }
+```
+
+## Domain-Specific Languages (DSL)
+DSLs are customized languages tailored to a particular domain, enabling concise and precise communication between developers and stakeholders. DSLs allow for the expression of complex business rules and concepts in such way that is easily understood by non-technical experts. Creating a DSL, creates a software development environment more aligned with the problem space. Incorporating DSLs in the development process enhances collaboration and reduces the gap between technical and non-technical team members. It enables domain experts to actively participate in shaping the software's behavior, resulting in more accurate implementations. DSLs should be expressive, focused on the domain's core concepts, and designed to provide clarity and maintainability. Utilizing DSLs empowers teams to build systems that are closely aligned with the domain's intricacies and requirements.
+
+## Conclusion
+Systems must also be clean. An aggressive architecture obscures domain logic and affects agility. When the domain’s logic becomes ambiguous, the quality will suffer, because it will be easier for the bugs to hide and it will be more difficult to implement the customer's requirements.
+If agility is compromised, productivity will suffer and the benefits of TDD will be lost. At all levels of abstraction, the goal must be clear. Regardless of whether you are designing a system or individual modules, never forget to use the simplest things that work for your needs.
