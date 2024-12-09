@@ -3,15 +3,14 @@
 Robert C. Martin states:
 
 * Writing dirty code will lead to failure in our project.
-* Writing clean code may look difficult and time consuming, but it actually speeds upthe development and debugging.
+* Writing clean code may look difficult and time consuming, but it actually speeds up the development and debugging.
 * To clean a dirty code and rewrite it, requires additional effort, but it is worth it. Because it creates value.
 
 Spending time for cleaning the code is not only cost-effective, but also the condition of professional survival.
 
 Disturbances quickly lead to slowness and deadline violations. The only way to move quickly and meet the deadline is to keep the code clean at its highest level and at all times. So the importance of clean code can not be denied.
 
-In this document, we learn more about the concept of clean code and try to consider its
-several different definitions.
+In this document, we learn more about the concept of clean code and try to consider its several different definitions.
 
 ## Why should my code be clean?
 ### Martin Fowler(British Software Engineer): Any fool can write a code that a computer understands. Good programmers write a code that humans can understand.
@@ -22,7 +21,7 @@ Considering the time and energy consumed for debugging a dirty code, we find it 
 
 
 ## What happens if my code is not clean?
-There is a state in software development where modifying the code leads to more dysfunctionality of the software. The code is so unrecognized that in some point it will be impossible to change it. This phase is called _wading_.
+There is a state in software development where modifying the code leads to more dysfunctionality of the software. The code is so unrecognized that in some point it will be impossible to change it. This phase is called wading.
 
 ## What do the pioneers of software industry say about clean code?
 ### Bjarne Strostrup - Creator of C++
