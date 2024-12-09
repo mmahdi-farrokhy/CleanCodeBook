@@ -55,17 +55,19 @@ Name of the classes, methods and variables must have some characteristics to mak
 The name should be chosen in such way that no comments or documents are required to answer these questions. Name of the element should answer all the big questions. If a name needs comment, it doesn’t reveal its intent.
 
 ```
-private void changeColorOfText()
+    // BAD CODE
+    private void changeColorOfText()
 ```
 ```
-private void changeColorOfTextOnMouseClick()
+    // BAD CODE
+    private void changeColorOfTextOnMouseClick()
 ```
 
 2. **The name should not give dis-information.** Using names that may mislead the reader, will take more time to understand the code. Or even take his mind towards another concept with a similar name, or hidethe meaning of the code. Some possible situations:
-    - Using the name hpas the acronym of hypotenuse.
-    - Using the name accountListwhile its type is not List. Instead we can use accountGroup, bunchOfAccountsor even accounts.
+    - Using the name hp as the acronym of hypotenuse.
+    - Using the name accountList while its type is not List. Instead we can use accountGroup, bunchOfAccountsor even accounts.
     - Using long similar names like XYZControllerForEfficientHandlingOfStrings and XYZControllerForEfficientStorageOfStrings.
-    - Using the letters Oand lalong side with the numbers 0 and 1.
+    - Using the letters O and l along side with the numbers 0 and 1.
 
 3. **The name should make meaningful distinctions.** We should pick a name for code elements in such way to differthem easily, no matter how much they are alike. Some examples:
     - The names in a scope, or method arguments should not be singularletterand similar, like they are only to satisfy the compiler. The reader should not be forced to read the algorithm to understand the intention of the variable.
@@ -73,9 +75,9 @@ private void changeColorOfTextOnMouseClick()
     - Using words like variable, methodor classfor naming.
 
 4. **The name should be pronounceable.**
-    Maybe using bthymdhas a variable name look like a good decision as the acronym of birthdayYearMonthDayHourin the first look. But every time you want to read this part of code you will be forced to wait for a few seconds so you could understand and read this variable.
+    Maybe using bthymdh as a variable name look like a good decision as the acronym of birthdayYearMonthDayHour in the first look. But every time you want to read this part of code you will be forced to wait for a few seconds so you could understand and read this variable.
 
-5. **The name should be searchable.** Using singular letter variables or constant numbers in the code will make it difficult to find them in code with the eye quickly.
+5. **The name should be searchable.** Using singular letter variables or constant numbers will make it difficult to find them in code with the eye quickly.
     - Variable names should be more than 3 characters long.
     - Constant numbers should be stored in a finalvariable and use the variable where needed.
 
@@ -95,7 +97,7 @@ private void changeColorOfTextOnMouseClick()
     - Gettermethods should start with get.
     - Booleanmethodsshould start with is.
 
-10. **Use one word for one concept.** If you once used insertas a keyword for adding a new element to a collection, use *insert* for any situation you add a new element to a collection. If you once used getas a keyword for getting an existing element in a collection, use *get* for any situation you get an existing element in a collection.
+10. **Use one word for one concept.** If you once used insert as a keyword for adding a new element to a collection, use *insert* for any situation you add a new element to a collection. If you once used getas a keyword for getting an existing element in a collection, use *get* for any situation you get an existing element in a collection.
 
 11. **Use solution domain names.** It is better to use computer science terms, design patterns and algorithms names instead of using the problem domain names all the time. Using problem domain names requires the presence of a domain expert.
 
@@ -104,21 +106,21 @@ private void changeColorOfTextOnMouseClick()
 13. **Add meaningful context.** Some names may be ambiguous by themselves. Adding a meaningful context can clear the naming.
 
 14. **Don’t add gratuitous context.**
-    Some prefixes or postfixes only add more complexity. Imagine adding perat the beginning of every property name in class Person. By writing perthe IDE suggests too many different objects and it confuses us.
+Some prefixes or postfixes only add more complexity. Imagine adding per at the beginning of every property name in class Person. By writing per the IDE suggests too many different objects and it confuses us.
 
 ## In brief meaningful name has these features:
 - The name is not dis-informative.
-- The name doesn’t remind the reader of anotherconcept.
-- The name doesn’t need commentsto be understood.
+- The name doesn’t remind the reader of another concept.
+- The name doesn’t need comments to be understood.
 - The name reveals the author’s intentions.
-- The names of the classes, objects and variables are nounsor nounphrases.
-- The names of the methods are verbsor verbphrases.
+- The names of the classes, objects and variables are nouns or noun phrases.
+- The names of the methods are verbs or verb phrases.
 - The names of the enums are adjectives.
-- The names of the packages are nounsor nounphrases.
-- There is a semanticcontinuitybetween name of the class with its methods and properties.
-- There is no similarand duplicatednames.
-- The more the distanceof a variable’s declaration and usage, the longerits name.
-- The more publica method, the more generalits task and the shorterits name.
+- The names of the packages are nouns or noun phrases.
+- There is a semantic continuity between name of the class with its methods and properties.
+- There is no similar and duplicated names.
+- The more the distance of a variable’s declaration and usage, the longer its name.
+- The more publica method, the more general its task and the shorter its name.
 ---
 # Methods
 Methods play an important role in code; they define a class's behavior. You might have encountered methods
