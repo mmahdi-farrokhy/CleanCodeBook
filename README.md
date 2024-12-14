@@ -431,7 +431,7 @@ If try-catch is required, it should be isolated as the implementation of a metho
 Although I'd like to say _“don’t use comments”_ , it's not always practical. Because sometimes they can lead to value. So we should consider some points about them.
 
 ### *Point 1: Comments Don’t Repay For Bad Code.*
-If a section of code is unclear, don't comment it. Refactor it.
+If a section of code is unclear, don't comment it, Refactor it.
 
 ### *Point 2: Express Yourself In Code.*
 Code is the most effective way to transfer the author's message to fellow developers.
@@ -481,7 +481,7 @@ Explaining the reason behind a particular code decision.
 ```
 
 ### *Point 6: Clarification Of An Ambiguous Code By Comment Is Valuable.*
-If the method is part of an standard library and can not be refactored by the programmer, it’s a good idea to make it clerar.
+If the method is part of an standard library and can not be refactored by the programmer, it’s a good idea to make it clear.
 
 ```
     // ACCEPTABLE
@@ -495,7 +495,7 @@ Notify others if certain code sections might be time-consuming to run.
 ```
     // ACCEPTABLE
     // Don't run unless you have time to kill
-    public void _testWithReallyBigFile() {
+    public void testWithReallyBigFile() {
         writeLinesToFile(10000000);
         response.setBody(testFile);
         response.readyToSend(this);
