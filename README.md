@@ -133,7 +133,7 @@ Such methods are listed as dirty code. However, there are some points to conside
 
 ## Rules of clean methods:
 ### *Rule #1: One Method – One Task*
-Each method should implement one and only one task. While the implementation itself may involve calling multiple methods that execute a solitary job. If a method takes the responsibility of more than one task, it does the task either wrong or dirty. One way to know if the method does more than one job is to name the method as it reflects the sequence of events within it. If the method name contains or, andor thenit does multiple tasks. Each proposition between these words is to be implemented as a separate method.
+Each method should implement one and only one task. While the implementation itself may involve calling multiple methods that execute a solitary job. If a method takes the responsibility of more than one task, it does the task either wrong or dirty. One way to know if the method does more than one job is to name the method as it reflects the sequence of events within it. If the method name contains or, and or then it does multiple tasks. Each proposition between these words is to be implemented as a separate method.
 
 ```
     // BAD CODE
@@ -159,10 +159,10 @@ Each method should implement one and only one task. While the implementation its
 ```
 
 ### *Rule #2: Method Is Small As Possible.*
-There is a saying about this rule: **Extract till you drop.** We break a method down to smaller methods to reduce complexity and code duplication. This aligns with rule #1.
+There is a saying about this rule: **Extract till you drop.** We break a method down to smaller ones to reduce complexity and code duplication. This aligns with rule #1.
 
 ### *Rule #3: The Fewer The Arguments, The Cleaner The Method*
-Having too many arguments for a method confuses the reader and makes it more difficult to understand the method’s behavior. It also complicates writing coverable tests. Best kind of method has no arguments. Although we can have method arguments, but it's not recommended to havw more than with 3 arguments. One way to decrease the number of arguments is to gather similar ones in a single object.
+Having too many arguments for a method confuses the reader and makes it more difficult to understand the method’s behavior. It also complicates writing coverable tests. Best kind of method has no arguments. Although we can have method arguments, but it's not recommended to have more than with 3 arguments. One way to decrease the number of arguments is to gather similar ones in a single object.
 
 ```
     // BAD CODE
@@ -175,7 +175,7 @@ Having too many arguments for a method confuses the reader and makes it more dif
 ```
 
 ### *Rule #4: No Boolean/Null/Enum Arguments*
-Introducing boolean/nullable/enum arguments introduces branching logic, leading to multiple distinct paths depending on argument's value. So it violates rule #1. Because more than one task is being implemented in one method. We should check its value before calling the method and implement differene methods for its differene values.
+Introducing boolean/nullable/enum arguments introduces branching logic, leading to multiple distinct paths depending on argument's value. So it violates rule #1. Because more than one task is being implemented in one method. We should check its value before calling the method and implement different methods for its different values.
 
 ```
     // BAD CODE
