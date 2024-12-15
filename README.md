@@ -617,7 +617,7 @@ In the code below, there are three anemic classes and a client class that uses t
     }
 ```
 
-Here is an Object-Oriented code with *interface*s that define *business rule*s. Adding a new business logic means defining a new abstract method in the interface and implementing it in concrete classes. So, adding new business logic affects all of them. Adding a new concrete class affetcs the client class.
+Here is an Object-Oriented code with *interface*s that define *business rule*s. Adding a new business logic means defining a new abstract method in the interface and implementing it in concrete classes. So, adding new business logic affects all of them. Adding a new concrete class affects the client class.
 ```
     // OBJECT ORIENTED CODE
     public interface Shape {
@@ -658,10 +658,10 @@ Here is an Object-Oriented code with *interface*s that define *business rule*s. 
 
     ///////////////////////////////
 
-    public class Client {
+    public class ShapeService {
         Shape shape;
 
-        public Client(Shape shape){
+        public ShapeService(Shape shape) {
             this.shape = shape;
         }
 
@@ -670,26 +670,49 @@ Here is an Object-Oriented code with *interface*s that define *business rule*s. 
         }
     }
 
-    public class Main {
-        private ShapeType shapeType = ShapeType.Square;
-        private Client client;
+    public class ClientClass {
+        private ShapeType shapeType;
+        private ShapeService shapeService;
 
-        public static void main(String args[]){
-            switch (shapeType) {
-                case Square:
-                    client = new Client(new Square());
-                    break;
-
-                case Rectangle:
-                    client = new Client(new Rectangle());
-                    break;
-
-                case Circle:
-                    client = new Client(new Circle());
-                    break;
-
-            double area = client.calculateArea();
+        public ClientClass(ShapeType shapeType) {
+            this.shapeType = shapeType;
+            this.shapeService = ShapeServiceFactory.createShapeService(shapeType);
         }
+
+        public double calculateArea() {
+            return shapeService.calculateArea();
+        }
+    }
+
+    public class ShapeServiceFactory {
+        private ShapeServiceFactory() {
+        }
+
+        public static ShapeService createShapeService(ShapeType shapeType) {
+            Shape shape;
+
+            switch (shapeType) {
+                case ShapeType.Square:
+                    shape = new Square();
+                    break;
+
+                case ShapeType.Rectangle:
+                    shape = new Rectangle();
+                    break;
+
+                case ShapeType.Circle:
+                    shape = new Circle();
+                    break;
+            }
+
+            return new ShapeService(shape);
+        }
+    }
+
+    public enum ShapeType {
+        Rectangle,
+        Circle,
+        Square
     }
 ```
 
