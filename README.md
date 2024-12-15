@@ -870,7 +870,7 @@ Third Party Code is a code that we use, but did not write. Like calling an API. 
           - Search online, especially if we're using a well-known library or framework.
           - The most effective method: Create learning tests. This approach is quick, cost-effective, and secure.
 
-2. We might depend too heavily on APIs in our program. If the API's main functionality changes, we'll be forced to change our code to adapt with the new version; and this violates *Open-Close Pronciple* from *S.O.L.I.D*.
+2. We might depend too heavily on APIs in our program. If the API's main functionality changes, we'll be forced to change our code to adapt with the new version; and this violates *Open-Close Principle* from *S.O.L.I.D*.
 3. This API might offer more functions than we actually require.
 
       - **Solution To Problems #2 And #3: Wrapper Module:** Once we've got familiar with the third-party code, we can start incorporating it into our program. There are two approaches for that:
