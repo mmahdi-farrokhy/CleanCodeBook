@@ -935,7 +935,7 @@ Each language has its own standard structure for the classes. In Java (and simil
 7. Private methods which are called by public methods
 
 ## Encapsulation
-Tests dominate the code. If a test inside the package needs to call a method or access a field, that method or field should be declared as protectedor to be accessible all over the package. Yet, decreasing the encapsulation level should be the last thing to consider.
+Tests dominate the code. If a test inside the package needs to call a method or access a field, that method or field should be declared as protected to be accessible all over the package. Yet, decreasing the encapsulation level should be the last thing to consider.
 
 ## Minimal Classes
 The first rule for classes is that they should be small as possible. Just like the methods, being minimal is the primary principle for designing the classes.
@@ -980,7 +980,7 @@ Adapter design pattern.
 - There is conceptual continuity between fields and methods in a clean class.
 - If a method is too large, it should be divided into multiple small methods, each one implementing one task.
 - Some of these small methods interact with some objects from a specific class. They should be moved to that class.
-- It is very usual to add new features or fix bugs in a software. The legacy code has to change. It comes with a risk. The change on one module would disrupt the functionality of others. To avoid this issue, we use interfaces or abstract classes, and place the new codes inside a new class that extends the parent class or interface.
+- It is very usual to add new features or fix bugs in a software. The legacy code has to change. It comes with a risk. The change on one module would disrupt the functionality of others. To avoid it, we use interfaces or abstract classes, and place the new codes inside a new class that extends the parent class or interface.
 ---
 # Systems
 A software system is composed of distinct sub-systems and layers, each handling specific tasks. Crucially, these sub-systems must be isolated from one another. The client method constructs the required objects for the system and hands them over to the application layer, which utilizes them.
