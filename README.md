@@ -885,7 +885,7 @@ Third Party Code is a code that we use, but did not write. Like calling an API. 
 - **Forward Planning:** Imagine a scenario where the API isn't available yet. We could create other modules of our program, test and use them without problems. This is because our dependency on the API is limited to just one class. This grants us and the API development team more flexibility and time for development.
 ---
 # Unit Tests
-### *Test Driven Development*: It's really important to write effective unit tests to ensure code quality, reliability, and maintainability. They provide us early detection of bugs during development. It's also so imortant to keep test code as clean as production code. Clean tests satisfy the need for documentation, as they describe the logical flow of a class or even the entire software.
+### *Test Driven Development*: It's really important to write effective unit tests to ensure code quality, reliability, and maintainability. They provide us early detection of bugs during development. It's also so important to keep test code as clean as production code. Clean tests satisfy the need for documentation, as they describe the logical flow of a class or even the entire software.
 
 ## The Three Laws of TDD
 Test Driven Development (TDD) is a practice where tests are written before the actual code. TDD is guided by three laws:
@@ -915,7 +915,7 @@ Here we consider some points about TDD.
 - One Test – One Concept
     - Best practice is to test a single concept inside each test method.
     - Avoid lengthy test methods that test multiple subjects consecutively.
-    - This principle aligns with the earlier guideline and results to  minimal assertions in test methods.
+    - This principle aligns with the earlier guideline and results to minimal assertions in test methods.
 
 - Tests Should Be F.I.R.S.T: Clean tests also follow five other guidelines:
     - Fast: Test should run quickly.
